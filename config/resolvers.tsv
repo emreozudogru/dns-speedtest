@@ -66,3 +66,44 @@
 # ns.turknet.net.tr and REFUSES recursion — not a resolver secondary.
 1	TurkNet	193.192.98.8	isp	none	TurkNet recursive DNS primary (Turkey)	https://ipinfo.io/193.192.98.8
 1	TurkNet	212.154.100.18	isp	none	TurkNet recursive DNS secondary (Turkey)	https://ipinfo.io/212.154.100.18
+
+# --- Control D Free DNS (https://docs.controld.com/docs/free-dns) ---
+1	Control D	76.76.2.0	public	none	Control D free unfiltered primary	https://docs.controld.com/docs/free-dns
+1	Control D	76.76.10.0	public	none	Control D free unfiltered secondary	https://docs.controld.com/docs/free-dns
+0	Control D	76.76.2.1	public	malware	Control D free malware primary	https://docs.controld.com/docs/free-dns
+0	Control D	76.76.10.1	public	malware	Control D free malware secondary	https://docs.controld.com/docs/free-dns
+0	Control D	76.76.2.4	public	family	Control D free Family Friendly primary	https://docs.controld.com/docs/free-dns
+0	Control D	76.76.10.4	public	family	Control D free Family Friendly secondary	https://docs.controld.com/docs/free-dns
+
+# --- CIRA Canadian Shield (https://www.cira.ca/en/canadian-shield/configure/summary-cira-canadian-shield-dns-resolver-addresses/) ---
+1	CIRA	149.112.121.10	public	none	Canadian Shield Private (resolution only) primary	https://www.cira.ca/en/canadian-shield/configure/summary-cira-canadian-shield-dns-resolver-addresses/
+1	CIRA	149.112.122.10	public	none	Canadian Shield Private secondary	https://www.cira.ca/en/canadian-shield/configure/summary-cira-canadian-shield-dns-resolver-addresses/
+0	CIRA	149.112.121.20	public	malware	Canadian Shield Protected (malware/phishing) primary	https://www.cira.ca/en/canadian-shield/configure/summary-cira-canadian-shield-dns-resolver-addresses/
+0	CIRA	149.112.122.20	public	malware	Canadian Shield Protected secondary	https://www.cira.ca/en/canadian-shield/configure/summary-cira-canadian-shield-dns-resolver-addresses/
+0	CIRA	149.112.121.30	public	family	Canadian Shield Family primary	https://www.cira.ca/en/canadian-shield/configure/summary-cira-canadian-shield-dns-resolver-addresses/
+0	CIRA	149.112.122.30	public	family	Canadian Shield Family secondary	https://www.cira.ca/en/canadian-shield/configure/summary-cira-canadian-shield-dns-resolver-addresses/
+
+# --- CleanBrowsing (https://cleanbrowsing.org/filters) ---
+# Security Filter is the closest general-purpose option (malware/phishing only).
+1	CleanBrowsing	185.228.168.9	public	malware	Security Filter primary (malware/phishing, no adult block)	https://cleanbrowsing.org/filters
+1	CleanBrowsing	185.228.169.9	public	malware	Security Filter secondary	https://cleanbrowsing.org/filters
+0	CleanBrowsing	185.228.168.168	public	family	Family Filter primary (adult + malware)	https://cleanbrowsing.org/filters
+0	CleanBrowsing	185.228.169.168	public	family	Family Filter secondary	https://cleanbrowsing.org/filters
+0	CleanBrowsing	185.228.168.10	public	family	Adult Filter primary	https://cleanbrowsing.org/filters
+0	CleanBrowsing	185.228.169.11	public	family	Adult Filter secondary	https://cleanbrowsing.org/filters
+
+# --- DNS4EU Public Service (https://joindns4.eu/for-public) ---
+1	DNS4EU	86.54.11.100	public	none	DNS4EU Unfiltered primary	https://joindns4.eu/for-public
+1	DNS4EU	86.54.11.200	public	none	DNS4EU Unfiltered secondary	https://joindns4.eu/for-public
+0	DNS4EU	86.54.11.1	public	malware	DNS4EU Protective primary	https://joindns4.eu/for-public
+0	DNS4EU	86.54.11.201	public	malware	DNS4EU Protective secondary	https://joindns4.eu/for-public
+0	DNS4EU	86.54.11.12	public	family	DNS4EU Protective + Child Protection primary	https://joindns4.eu/for-public
+0	DNS4EU	86.54.11.212	public	family	DNS4EU Protective + Child Protection secondary	https://joindns4.eu/for-public
+
+# --- Yandex DNS (https://dns.yandex.com/) ---
+1	Yandex	77.88.8.8	public	none	Yandex DNS Basic primary	https://dns.yandex.com/
+1	Yandex	77.88.8.1	public	none	Yandex DNS Basic secondary	https://dns.yandex.com/
+0	Yandex	77.88.8.88	public	malware	Yandex DNS Safe primary	https://dns.yandex.com/
+0	Yandex	77.88.8.2	public	malware	Yandex DNS Safe secondary	https://dns.yandex.com/
+0	Yandex	77.88.8.7	public	family	Yandex DNS Family primary	https://dns.yandex.com/
+0	Yandex	77.88.8.3	public	family	Yandex DNS Family secondary	https://dns.yandex.com/
