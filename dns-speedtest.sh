@@ -1,5 +1,6 @@
 #!/bin/bash
 # dns-speedtest — measure DNS query time of resolver IP addresses.
+# Copyright (c) 2026 Emre Ozudogru
 # Compatible with Bash 3.2 (macOS /bin/bash) and Linux Bash.
 # Do not require a newer Homebrew Bash.
 
