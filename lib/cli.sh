@@ -196,6 +196,7 @@ dnsst_parse_args() {
         ;;
       --version|-V)
         printf 'dns-speedtest %s\n' "$DNSST_VERSION"
+        printf 'Copyright (c) 2026 %s\n' "$DNSST_AUTHOR"
         exit 0
         ;;
       --)
