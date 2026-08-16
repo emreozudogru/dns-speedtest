@@ -376,6 +376,9 @@ dnsst_write_metadata() {
     printf 'domain_cache_used=%s\n' "${DNSST_DOMAIN_CACHE_USED:-0}"
     printf 'refresh_domains=%s\n' "${DNSST_REFRESH_DOMAINS:-0}"
     printf 'include_disabled=%s\n' "${DNSST_INCLUDE_DISABLED:-0}"
+    printf 'probe_enabled=%s\n' "$([ "${DNSST_NO_PROBE:-0}" -eq 1 ] && echo 0 || echo 1)"
+    printf 'resolvers_skipped=%s\n' "${DNSST_SKIPPED_COUNT:-0}"
+    printf 'skipped_ips=%s\n' "${DNSST_SKIPPED_IPS:-}"
     printf 'dig_command=%s\n' "dig +time=${DNSST_QUERY_TIMEOUT} +tries=1 +retry=0 +nosearch +ignore @IP domain ${DNSST_QUERY_TYPE}"
   } > "$DNSST_META_TXT"
 
@@ -405,6 +408,9 @@ dnsst_write_metadata() {
     printf '  "domain_cache_used": %s,\n' "${DNSST_DOMAIN_CACHE_USED:-0}"
     printf '  "refresh_domains": %s,\n' "${DNSST_REFRESH_DOMAINS:-0}"
     printf '  "include_disabled": %s,\n' "${DNSST_INCLUDE_DISABLED:-0}"
+    printf '  "probe_enabled": %s,\n' "$([ "${DNSST_NO_PROBE:-0}" -eq 1 ] && echo 0 || echo 1)"
+    printf '  "resolvers_skipped": %s,\n' "${DNSST_SKIPPED_COUNT:-0}"
+    printf '  "skipped_ips": '; dnsst_json_str "${DNSST_SKIPPED_IPS:-}"; printf ',\n'
     printf '  "dig_command": '; dnsst_json_str "dig +time=${DNSST_QUERY_TIMEOUT} +tries=1 +retry=0 +nosearch +ignore @IP domain ${DNSST_QUERY_TYPE}"
     printf '\n}\n'
   } > "$DNSST_META_JSON"
