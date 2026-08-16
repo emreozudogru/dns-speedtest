@@ -42,7 +42,7 @@ Do **not** install a newer Bash just to run this tool.
 ## Quick start
 
 ```bash
-git clone <this-repo> dns-speedtest
+git clone https://github.com/emreozudogru/dns-speedtest.git
 cd dns-speedtest
 chmod +x dns-speedtest.sh
 ./dns-speedtest.sh --duration 5m
@@ -435,11 +435,19 @@ and on macOS `/bin/bash`.
 - DoH / DoT / DoQ are not measured.
 - Resolver hostnames are not benchmarked (by design).
 - Only a single query type per run (default `A`).
-- The bundled enabled set is IPv4. IPv6 works if you enable those rows
-  and have IPv6 connectivity.
+- The default database includes IPv6 rows. On IPv4-only networks the
+  pre-run probe skips them.
 - Median / p95 during the live display are computed from files on each
   interval; they are correct but not free on huge runs.
 
 ## License
 
 MIT. See [LICENSE](LICENSE).
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md). Please follow the
+[code of conduct](CODE_OF_CONDUCT.md). Security reports:
+[SECURITY.md](SECURITY.md).
+
+Resolver address citations: [docs/SOURCES.md](docs/SOURCES.md).
