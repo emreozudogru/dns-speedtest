@@ -121,6 +121,20 @@ dnsst_classify_dig() {
   printf '%s\t%s\t%s\t%s\t%s\t%s\n' "$_rcode" "$_outcome" "$_success" "$_qtime" "${_ans:-}" "$_err"
 }
 
+# 0 if the resolver returned a DNS RCODE (NOERROR/NXDOMAIN/SERVFAIL/REFUSED/…).
+# 1 if there was no DNS response (timeout, comms error, command failure).
+dnsst_resolver_reachable() {
+  local _ip _line _outcome
+  _ip=$1
+  _line=$(dnsst_run_dig "$_ip" "${DNSST_PROBE_DOMAIN:-example.com}" \
+    "${DNSST_QUERY_TYPE:-A}" "${DNSST_QUERY_TIMEOUT:-2}")
+  _outcome=$(printf '%s' "$_line" | awk -F '\t' '{ print $2 }')
+  case "$_outcome" in
+    timeout|command_failure) return 1 ;;
+    *) return 0 ;;
+  esac
+}
+
 # Worker used by sequential and parallel modes. Writes one result file.
 # Args: outfile domain resolver_index elapsed_start_epoch
 dnsst_query_worker() {
