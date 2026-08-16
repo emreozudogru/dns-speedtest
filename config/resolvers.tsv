@@ -60,6 +60,9 @@
 0	AdGuard	94.140.15.16	public	family	AdGuard Family protection secondary	https://adguard-dns.io/en/public-dns.html
 
 # --- TurkNet ISP DNS ---
-# Commonly published TurkNet recursive address (AS12735). This is an ISP
+# Commonly published TurkNet recursive addresses (AS12735). This is an ISP
 # resolver, not a global public anycast product like 1.1.1.1 / 8.8.8.8.
-1	TurkNet	193.192.98.8	isp	none	TurkNet recursive DNS (Turkey)	https://ipinfo.io/193.192.98.8
+# 212.154.100.18 answers recursively (NOERROR + RA). 212.154.100.10 is
+# ns.turknet.net.tr and REFUSES recursion — not a resolver secondary.
+1	TurkNet	193.192.98.8	isp	none	TurkNet recursive DNS primary (Turkey)	https://ipinfo.io/193.192.98.8
+1	TurkNet	212.154.100.18	isp	none	TurkNet recursive DNS secondary (Turkey)	https://ipinfo.io/212.154.100.18
