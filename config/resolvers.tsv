@@ -3,17 +3,16 @@
 #   enabled  provider  ip  service_type  filtering  notes  source
 #
 # enabled: 1/0, yes/no, true/false
-# Filtering resolvers are labeled and disabled by default so they are not
-# silently compared as equivalent to unfiltered resolvers.
-# IPv6 rows are accepted by the parser; bundled defaults that are enabled
-# are IPv4 for predictable out-of-the-box operation.
+# Default is to test every row. Filtering variants stay labeled so they
+# are not silently treated as equivalent to unfiltered resolvers.
+# IPv6 rows are included; they time out on IPv4-only networks.
 #
 # Addresses verified against official provider documentation on 2026-08-16.
 # See docs/SOURCES.md.
 
 # --- Cloudflare Public DNS (https://developers.cloudflare.com/1.1.1.1/ip-addresses/) ---
 # Three product categories: unfiltered (1.1.1.1), malware (1.1.1.2), family (1.1.1.3).
-# IPv4 secondaries are enabled. IPv6 stays disabled for predictable IPv4-only runs.
+# All IPv4 and IPv6 addresses in this section are enabled.
 1	Cloudflare	1.1.1.1	public	none	Standard 1.1.1.1 unfiltered resolver	https://developers.cloudflare.com/1.1.1.1/ip-addresses/
 1	Cloudflare	1.0.0.1	public	none	Standard 1.1.1.1 secondary unfiltered resolver	https://developers.cloudflare.com/1.1.1.1/ip-addresses/
 1	Cloudflare	1.1.1.2	public	malware	1.1.1.1 for Families: block malware	https://developers.cloudflare.com/1.1.1.1/ip-addresses/
