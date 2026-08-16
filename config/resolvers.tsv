@@ -12,13 +12,20 @@
 # See docs/SOURCES.md.
 
 # --- Cloudflare Public DNS (https://developers.cloudflare.com/1.1.1.1/ip-addresses/) ---
+# Three product categories: unfiltered (1.1.1.1), malware (1.1.1.2), family (1.1.1.3).
+# Secondaries and IPv6 stay disabled; they are the same anycast services.
 1	Cloudflare	1.1.1.1	public	none	Standard 1.1.1.1 unfiltered resolver	https://developers.cloudflare.com/1.1.1.1/ip-addresses/
 0	Cloudflare	1.0.0.1	public	none	Standard 1.1.1.1 secondary unfiltered resolver	https://developers.cloudflare.com/1.1.1.1/ip-addresses/
-0	Cloudflare	1.1.1.2	public	malware	1.1.1.1 for Families: block malware	https://developers.cloudflare.com/1.1.1.1/ip-addresses/
+1	Cloudflare	1.1.1.2	public	malware	1.1.1.1 for Families: block malware	https://developers.cloudflare.com/1.1.1.1/ip-addresses/
 0	Cloudflare	1.0.0.2	public	malware	1.1.1.1 for Families secondary: block malware	https://developers.cloudflare.com/1.1.1.1/ip-addresses/
-0	Cloudflare	1.1.1.3	public	family	1.1.1.1 for Families: block malware and adult content	https://developers.cloudflare.com/1.1.1.1/ip-addresses/
+1	Cloudflare	1.1.1.3	public	family	1.1.1.1 for Families: block malware and adult content	https://developers.cloudflare.com/1.1.1.1/ip-addresses/
 0	Cloudflare	1.0.0.3	public	family	1.1.1.1 for Families secondary: malware and adult content	https://developers.cloudflare.com/1.1.1.1/ip-addresses/
 0	Cloudflare	2606:4700:4700::1111	public	none	Standard 1.1.1.1 unfiltered IPv6	https://developers.cloudflare.com/1.1.1.1/ip-addresses/
+0	Cloudflare	2606:4700:4700::1001	public	none	Standard 1.1.1.1 secondary unfiltered IPv6	https://developers.cloudflare.com/1.1.1.1/ip-addresses/
+0	Cloudflare	2606:4700:4700::1112	public	malware	1.1.1.1 for Families malware IPv6	https://developers.cloudflare.com/1.1.1.1/ip-addresses/
+0	Cloudflare	2606:4700:4700::1002	public	malware	1.1.1.1 for Families malware secondary IPv6	https://developers.cloudflare.com/1.1.1.1/ip-addresses/
+0	Cloudflare	2606:4700:4700::1113	public	family	1.1.1.1 for Families malware+adult IPv6	https://developers.cloudflare.com/1.1.1.1/ip-addresses/
+0	Cloudflare	2606:4700:4700::1003	public	family	1.1.1.1 for Families malware+adult secondary IPv6	https://developers.cloudflare.com/1.1.1.1/ip-addresses/
 
 # --- Google Public DNS (https://developers.google.com/speed/public-dns/docs/using) ---
 1	Google	8.8.8.8	public	none	Google Public DNS primary	https://developers.google.com/speed/public-dns/docs/using
