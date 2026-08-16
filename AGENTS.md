@@ -4,7 +4,11 @@ This repository is maintained by automated coding agents as well as humans.
 
 ## Git: smallest commit, then push
 
-After **every** change — even a one-line TSV edit, a comment, or a README tweak:
+The owner wants to **see every tiny change** in git history. Nothing is
+too small to commit: one TSV flag flip, one comment, one README sentence,
+a typo fix, a single function.
+
+After **every** such change:
 
 1. Stage **only** the files that belong to that single change.
 2. Create a commit immediately. Keep the diff as small as possible. Do not
