@@ -113,3 +113,7 @@
 # well-known public resolver (PTR ordns.he.net).
 1	Hurricane Electric	74.82.42.42	public	none	ordns.he.net anycast recursive resolver	https://bgp.he.net/ip/74.82.42.42
 0	Hurricane Electric	2001:470:20::2	public	none	ordns.he.net IPv6	https://bgp.he.net/ip/74.82.42.42
+
+# --- DNS.SB (https://dns.sb/) ---
+1	DNS.SB	185.222.222.222	public	none	DNS.SB primary	https://dns.sb/
+1	DNS.SB	45.11.45.11	public	none	DNS.SB secondary	https://dns.sb/
