@@ -3,6 +3,7 @@
 # Compatible with Bash 3.2 (macOS /bin/bash).
 
 DNSST_VERSION="1.0.0"
+DNSST_AUTHOR="Emre Ozudogru"
 
 dnsst_log() {
   printf '%s\n' "$*" >&2
