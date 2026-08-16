@@ -232,12 +232,18 @@ Verified against official documentation on 2026-08-16
 | Quad9 | `9.9.9.9` / `149.112.112.112` | malware / phishing blocklist (Quad9 default) |
 | OpenDNS | `208.67.222.222` / `208.67.220.220` | phishing protection (OpenDNS Home) |
 | AdGuard | `94.140.14.140` / `94.140.14.141` | none (official non-filtering server) |
-| TurkNet | `193.192.98.8` / `212.154.100.18` | none (ISP recursive DNS) |
+| TurkNet | `193.192.98.8` / `212.154.100.18` | none (`dns1.turk.net` / `dns2.turk.net`) |
 | Control D | `76.76.2.0` / `76.76.10.0` | none (free unfiltered) |
 | CIRA | `149.112.121.10` / `149.112.122.10` | none (Canadian Shield Private) |
 | CleanBrowsing | `185.228.168.9` / `185.228.169.9` | malware (Security Filter) |
 | DNS4EU | `86.54.11.100` / `86.54.11.200` | none (Unfiltered) |
 | Yandex | `77.88.8.8` / `77.88.8.1` | none (Basic) |
+| Hurricane Electric | `74.82.42.42` | none (`ordns.he.net`) |
+| DNS.SB | `185.222.222.222` / `45.11.45.11` | none |
+| CZ.NIC | `193.17.47.1` / `185.43.135.1` | none (ODVR, DNSSEC) |
+| Comodo | `8.26.56.26` / `8.20.247.20` | malware (Secure DNS) |
+| UncensoredDNS | `91.239.100.100` / `89.233.43.71` | none |
+| AliDNS | `223.5.5.5` / `223.6.6.6` | none |
 
 Official IPv4 secondaries of enabled services are **on**. IPv6 rows and
 extra filtering products (Quad9 unsecured/ECS, OpenDNS FamilyShield,
@@ -248,8 +254,7 @@ ship **disabled** and labeled. Enable them in the TSV or pass
 an unfiltered one.
 
 Mullvad’s published IPs are **DoH/DoT only** (not UDP/53) and are not
-included. dns0.eu has been discontinued. Hurricane Electric has no
-official public-resolver product page, so it is omitted.
+included. dns0.eu has been discontinued.
 
 ## How queries are made
 
