@@ -1,5 +1,7 @@
 # Security policy
 
+Maintainer: **Emre Ozudogru**
+
 ## Supported versions
 
 Only the latest commit on `main` is supported.
