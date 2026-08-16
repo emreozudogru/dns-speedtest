@@ -84,8 +84,92 @@ dnsst_run_domain_round() {
   return 0
 }
 
+# Drop resolvers that do not answer a single probe query.
+# SERVFAIL/REFUSED/NXDOMAIN still count as reachable.
+dnsst_probe_resolvers() {
+  local _k _ri _ip _prov _kept _kept_n _skip _batch_end _j _pid _probe_p
+  DNSST_SKIPPED_IPS=""
+  DNSST_SKIPPED_COUNT=0
+  [ "${DNSST_NO_PROBE:-0}" -eq 1 ] && return 0
+  [ "$DNSST_SEL_COUNT" -gt 0 ] || return 0
+
+  DNSST_PROBE_DOMAIN=${DNSST_PROBE_DOMAIN:-example.com}
+  dnsst_info "Checking reachability of $DNSST_SEL_COUNT resolver(s) via ${DNSST_PROBE_DOMAIN} ..."
+
+  _probe_p=8
+  _k=0
+  while [ "$_k" -lt "$DNSST_SEL_COUNT" ]; do
+    _batch_end=$((_k + _probe_p))
+    [ "$_batch_end" -le "$DNSST_SEL_COUNT" ] || _batch_end=$DNSST_SEL_COUNT
+    DNSST_WORKER_PIDS=""
+    _j=$_k
+    while [ "$_j" -lt "$_batch_end" ]; do
+      _ri=${DNSST_SEL[_j]}
+      (
+        if dnsst_resolver_reachable "${DNSST_R_IP[_ri]}"; then
+          printf 'ok\n' > "$DNSST_WORKDIR/probe_${_ri}"
+        else
+          printf 'fail\n' > "$DNSST_WORKDIR/probe_${_ri}"
+        fi
+      ) &
+      DNSST_WORKER_PIDS="$DNSST_WORKER_PIDS $!"
+      _j=$((_j + 1))
+    done
+    for _pid in $DNSST_WORKER_PIDS; do
+      wait "$_pid" || true
+    done
+    DNSST_WORKER_PIDS=""
+    _k=$_batch_end
+  done
+
+  _kept=""
+  _kept_n=0
+  _k=0
+  while [ "$_k" -lt "$DNSST_SEL_COUNT" ]; do
+    _ri=${DNSST_SEL[_k]}
+    _ip=${DNSST_R_IP[_ri]}
+    _prov=${DNSST_R_PROVIDER[_ri]}
+    _skip=1
+    if [ -f "$DNSST_WORKDIR/probe_${_ri}" ]; then
+      case $(cat "$DNSST_WORKDIR/probe_${_ri}") in
+        ok) _skip=0 ;;
+      esac
+    fi
+    if [ "$_skip" -eq 0 ]; then
+      if [ -z "$_kept" ]; then
+        _kept=$_ri
+      else
+        _kept="$_kept $_ri"
+      fi
+      _kept_n=$((_kept_n + 1))
+    else
+      dnsst_warn "skipping unreachable resolver ${_prov} ${_ip}"
+      if [ -z "$DNSST_SKIPPED_IPS" ]; then
+        DNSST_SKIPPED_IPS=$_ip
+      else
+        DNSST_SKIPPED_IPS="$DNSST_SKIPPED_IPS $_ip"
+      fi
+      DNSST_SKIPPED_COUNT=$((DNSST_SKIPPED_COUNT + 1))
+    fi
+    _k=$((_k + 1))
+  done
+
+  DNSST_SEL=()
+  DNSST_SEL_COUNT=0
+  for _ri in $_kept; do
+    DNSST_SEL[DNSST_SEL_COUNT]=$_ri
+    DNSST_SEL_COUNT=$((DNSST_SEL_COUNT + 1))
+  done
+
+  dnsst_info "Reachable: $DNSST_SEL_COUNT   skipped: $DNSST_SKIPPED_COUNT"
+  if [ "$DNSST_SEL_COUNT" -eq 0 ]; then
+    dnsst_die "no reachable resolvers (all $DNSST_SKIPPED_COUNT failed the probe). Check network, IPv6, or pass --no-probe."
+  fi
+}
+
 dnsst_run_benchmark() {
   local _di
+  dnsst_probe_resolvers
   DNSST_START_EPOCH=$(dnsst_now_epoch)
   DNSST_START_ISO=$(dnsst_iso8601)
   if [ "$DNSST_DURATION_SECS" -gt 0 ]; then
