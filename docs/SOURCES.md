@@ -28,12 +28,18 @@ Verified with an HTTP HEAD of the permanent URL on 2026-08-16 (HTTP 200,
 | Quad9 | `9.9.9.9` / `149.112.112.112` (blocklist); `9.9.9.10` (no blocklist); `9.9.9.11` (blocklist + ECS) | https://quad9.net/service/service-addresses-and-features/ |
 | Cisco OpenDNS | `208.67.222.222` / `208.67.220.220` (Home); `208.67.222.123` / `208.67.220.123` (FamilyShield) | https://www.opendns.com/setupguide/ |
 | AdGuard Public DNS | `94.140.14.140` / `94.140.14.141` (non-filtering); `94.140.14.14` (ads); `94.140.14.15` (family) | https://adguard-dns.io/en/public-dns.html |
-| TurkNet (ISP) | `193.192.98.8`, `212.154.100.18` | Primary is widely published (AS12735). Secondary `212.154.100.18` is in TurkNet space (RIPE `TR-TURKNET-990212`) and was verified on 2026-08-16 to recurse (`NOERROR` + RA). `212.154.100.10` (`ns.turknet.net.tr`) refuses recursion and is not a resolver. |
+| TurkNet (ISP) | `dns1.turk.net` = `193.192.98.8`, `dns2.turk.net` = `212.154.100.18` | Hostnames resolve to those IPs. `dns2.turk.net` recurses (`NOERROR` + RA). `212.154.100.10` (`ns.turknet.net.tr`) refuses recursion and is not a resolver. |
 | Control D Free DNS | Unfiltered `76.76.2.0` / `76.76.10.0`; malware `76.76.2.1` / `76.76.10.1`; family `76.76.2.4` / `76.76.10.4` | https://docs.controld.com/docs/free-dns |
 | CIRA Canadian Shield | Private `149.112.121.10` / `149.112.122.10`; Protected `…121.20` / `…122.20`; Family `…121.30` / `…122.30` | https://www.cira.ca/en/canadian-shield/configure/summary-cira-canadian-shield-dns-resolver-addresses/ |
 | CleanBrowsing | Security `185.228.168.9` / `185.228.169.9`; Family `185.228.168.168` / `185.228.169.168`; Adult `185.228.168.10` / `185.228.169.11` | https://cleanbrowsing.org/filters |
 | DNS4EU Public Service | Unfiltered `86.54.11.100` / `86.54.11.200`; Protective `86.54.11.1` / `86.54.11.201`; Child `86.54.11.12` / `86.54.11.212` | https://joindns4.eu/for-public |
 | Yandex DNS | Basic `77.88.8.8` / `77.88.8.1`; Safe `77.88.8.88` / `77.88.8.2`; Family `77.88.8.7` / `77.88.8.3` | https://dns.yandex.com/ |
+| Hurricane Electric | `74.82.42.42` (`ordns.he.net`) | Well-known public anycast recursive resolver; PTR and HE BGP page https://bgp.he.net/ip/74.82.42.42 |
+| DNS.SB | `185.222.222.222` / `45.11.45.11` | https://dns.sb/ |
+| CZ.NIC ODVR | `193.17.47.1` / `185.43.135.1` | https://www.nic.cz/odvr/ |
+| Comodo Secure DNS | `8.26.56.26` / `8.20.247.20` | https://www.comodo.com/secure-dns/ |
+| UncensoredDNS | `91.239.100.100` / `89.233.43.71` | https://blog.uncensoreddns.org/ |
+| AliDNS | `223.5.5.5` / `223.6.6.6` | https://www.alidns.com/ |
 
 Cloudflare’s own docs describe `1.1.1.1` as providing “fast, private DNS
 lookups with no content filtering.” Quad9’s default `9.9.9.9` **does**
