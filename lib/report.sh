@@ -289,6 +289,7 @@ dnsst_write_summary_json() {
   {
     printf '{\n'
     printf '  "version": '; dnsst_json_str "$DNSST_VERSION"; printf ',\n'
+    printf '  "author": '; dnsst_json_str "$DNSST_AUTHOR"; printf ',\n'
     printf '  "ranking_rule": '; dnsst_json_str "reliable (success_rate>=${DNSST_RELIABLE_RATE}% and successful>=${DNSST_RELIABLE_MIN_OK}) first, then lower median, then lower p95, then lower mean, then higher success rate"; printf ',\n'
     printf '  "success_definition": '; dnsst_json_str "DNS response with RCODE NOERROR or NXDOMAIN and a dig Query time; timeouts are not 0 ms"; printf ',\n'
     printf '  "resolvers": [\n'
@@ -353,6 +354,7 @@ dnsst_write_metadata() {
   _stop=${DNSST_STOP_REASON:-completed}
   {
     printf 'version=%s\n' "$DNSST_VERSION"
+    printf 'author=%s\n' "$DNSST_AUTHOR"
     printf 'start_time=%s\n' "$DNSST_START_ISO"
     printf 'end_time=%s\n' "$(dnsst_iso8601)"
     printf 'os=%s\n' "${DNSST_OS_PRETTY:-$DNSST_PLATFORM}"
@@ -385,6 +387,7 @@ dnsst_write_metadata() {
   {
     printf '{\n'
     printf '  "version": '; dnsst_json_str "$DNSST_VERSION"; printf ',\n'
+    printf '  "author": '; dnsst_json_str "$DNSST_AUTHOR"; printf ',\n'
     printf '  "start_time": '; dnsst_json_str "$DNSST_START_ISO"; printf ',\n'
     printf '  "end_time": '; dnsst_json_str "$(dnsst_iso8601)"; printf ',\n'
     printf '  "os": '; dnsst_json_str "${DNSST_OS_PRETTY:-$DNSST_PLATFORM}"; printf ',\n'
