@@ -225,21 +225,31 @@ Verified against official documentation on 2026-08-16
 
 | Provider | IP | Filtering |
 |---|---|---|
-| Cloudflare | `1.1.1.1` | none (standard 1.1.1.1) |
-| Cloudflare | `1.1.1.2` | malware (1.1.1.1 for Families) |
-| Cloudflare | `1.1.1.3` | family (malware + adult content) |
-| Google | `8.8.8.8` | none |
-| Quad9 | `9.9.9.9` | malware / phishing blocklist (Quad9 default) |
-| OpenDNS | `208.67.222.222` | phishing protection (OpenDNS Home) |
-| AdGuard | `94.140.14.140` | none (official non-filtering server) |
-| TurkNet | `193.192.98.8` | none (ISP recursive DNS) |
+| Cloudflare | `1.1.1.1` / `1.0.0.1` | none (standard 1.1.1.1) |
+| Cloudflare | `1.1.1.2` / `1.0.0.2` | malware (1.1.1.1 for Families) |
+| Cloudflare | `1.1.1.3` / `1.0.0.3` | family (malware + adult content) |
+| Google | `8.8.8.8` / `8.8.4.4` | none |
+| Quad9 | `9.9.9.9` / `149.112.112.112` | malware / phishing blocklist (Quad9 default) |
+| OpenDNS | `208.67.222.222` / `208.67.220.220` | phishing protection (OpenDNS Home) |
+| AdGuard | `94.140.14.140` / `94.140.14.141` | none (official non-filtering server) |
+| TurkNet | `193.192.98.8` / `212.154.100.18` | none (ISP recursive DNS) |
+| Control D | `76.76.2.0` / `76.76.10.0` | none (free unfiltered) |
+| CIRA | `149.112.121.10` / `149.112.122.10` | none (Canadian Shield Private) |
+| CleanBrowsing | `185.228.168.9` / `185.228.169.9` | malware (Security Filter) |
+| DNS4EU | `86.54.11.100` / `86.54.11.200` | none (Unfiltered) |
+| Yandex | `77.88.8.8` / `77.88.8.1` | none (Basic) |
 
-Secondaries, IPv6 examples, Quad9 unsecured / ECS, OpenDNS FamilyShield,
-and AdGuard ad-blocking / family servers ship **disabled** and labeled.
-Enable them in the TSV or pass `--include-disabled`. Do not treat a
-filtering resolver as equivalent to an unfiltered one. Cloudflare’s
-three categories are enabled on purpose so they can be compared, but
-they are different products.
+Official IPv4 secondaries of enabled services are **on**. IPv6 rows and
+extra filtering products (Quad9 unsecured/ECS, OpenDNS FamilyShield,
+AdGuard ads/family, Control D malware/family, CIRA Protected/Family,
+CleanBrowsing Family/Adult, DNS4EU Protective/Child, Yandex Safe/Family)
+ship **disabled** and labeled. Enable them in the TSV or pass
+`--include-disabled`. Do not treat a filtering resolver as equivalent to
+an unfiltered one.
+
+Mullvad’s published IPs are **DoH/DoT only** (not UDP/53) and are not
+included. dns0.eu has been discontinued. Hurricane Electric has no
+official public-resolver product page, so it is omitted.
 
 ## How queries are made
 
