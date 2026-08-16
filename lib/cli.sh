@@ -22,6 +22,7 @@ OPTIONS
   --output-dir DIR         Write results here (default: results/YYYYMMDD-HHMMSS).
   --query-type TYPE        DNS query type (default: A).
   --include-disabled       Also test resolvers marked disabled in the TSV.
+  --no-probe               Skip the pre-run reachability check (test every resolver).
   --list-resolvers         Print the parsed resolver list and exit.
   --yes, -y                Auto-approve installing a missing required package.
   --no-install             Never attempt to install missing packages.
@@ -62,6 +63,7 @@ dnsst_cli_defaults() {
   DNSST_OUTPUT_DIR=""
   DNSST_QUERY_TYPE="A"
   DNSST_INCLUDE_DISABLED=0
+  DNSST_NO_PROBE=0
   DNSST_LIST_RESOLVERS=0
   DNSST_YES=0
   DNSST_NO_INSTALL=0
@@ -166,6 +168,10 @@ dnsst_parse_args() {
         ;;
       --include-disabled)
         DNSST_INCLUDE_DISABLED=1
+        shift
+        ;;
+      --no-probe)
+        DNSST_NO_PROBE=1
         shift
         ;;
       --list-resolvers)
