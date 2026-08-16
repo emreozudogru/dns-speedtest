@@ -321,6 +321,7 @@ PATH="$TESTS_DIR/mocks:$PATH" \
     --output-dir "$_outseq" \
     --quiet \
     --no-install \
+    --no-probe \
     --query-timeout 2 \
     --parallel 1 \
     >"$WORKDIR/seq.stdout" 2>"$WORKDIR/seq.stderr" || {
@@ -379,6 +380,7 @@ PATH="$TESTS_DIR/mocks:$PATH" \
     --output-dir "$_outpar" \
     --quiet \
     --no-install \
+    --no-probe \
     --parallel 3 \
     >"$WORKDIR/par.stdout" 2>"$WORKDIR/par.stderr" || {
       fail "parallel run exited non-zero"
@@ -420,7 +422,7 @@ PATH="$TESTS_DIR/mocks:$PATH" \
     --domain-file "$TESTS_DIR/fixtures/domains-order.txt" \
     --resolver-file "$TESTS_DIR/fixtures/resolvers-good.tsv" \
     --output-dir "$_outto" \
-    --quiet --no-install --parallel 1 \
+    --quiet --no-install --no-probe --parallel 1 \
     >"$WORKDIR/to.stdout" 2>"$WORKDIR/to.stderr" || {
       fail "timeout-run exited non-zero"
     }
@@ -446,6 +448,33 @@ done < "$_outto/queries.csv"
 assert_eq "timeout not recorded as 0 ms" "$_bad" "0"
 assert_file_contains "timeout status in csv" "$_outto/queries.csv" "TIMEOUT"
 
+# ---------- reachability probe skips dead resolvers ----------
+section "reachability probe"
+export DNSST_MOCK_LOG="$WORKDIR/order-probe.log"
+: > "$DNSST_MOCK_LOG"
+_outpr="$WORKDIR/out-probe"
+PATH="$TESTS_DIR/mocks:$PATH" \
+  "$ROOT/dns-speedtest.sh" \
+    --domain-file "$TESTS_DIR/fixtures/domains-order.txt" \
+    --resolver-file "$TESTS_DIR/fixtures/resolvers-good.tsv" \
+    --output-dir "$_outpr" \
+    --quiet --no-install --parallel 1 \
+    >"$WORKDIR/probe.stdout" 2>"$WORKDIR/probe.stderr" || {
+      fail "probe-run exited non-zero"
+    }
+if grep -q '203.0.113.1' "$_outpr/queries.csv"; then
+  fail "unreachable 203.0.113.1 was still benchmarked"
+else
+  ok "probe omitted unreachable 203.0.113.1 from queries"
+fi
+assert_file_contains "probe skipped count" "$_outpr/metadata.txt" "resolvers_skipped=1"
+assert_file_contains "probe skipped ip" "$_outpr/metadata.txt" "203.0.113.1"
+if grep -q '1.1.1.1' "$_outpr/queries.csv" && grep -q '8.8.8.8' "$_outpr/queries.csv"; then
+  ok "probe kept reachable resolvers"
+else
+  fail "probe dropped a reachable resolver"
+fi
+
 # ---------- soft duration ----------
 section "soft duration deadline"
 export DNSST_MOCK_LOG="$WORKDIR/order-dur.log"
@@ -458,7 +487,7 @@ PATH="$TESTS_DIR/mocks:$PATH" \
     --domain-file "$TESTS_DIR/fixtures/domains-order.txt" \
     --resolver-file "$TESTS_DIR/fixtures/resolvers-order.tsv" \
     --output-dir "$_outdur" \
-    --quiet --no-install --parallel 1 \
+    --quiet --no-install --no-probe --parallel 1 \
     --duration 1s \
     >"$WORKDIR/dur.stdout" 2>"$WORKDIR/dur.stderr" || {
       fail "duration-run exited non-zero"
