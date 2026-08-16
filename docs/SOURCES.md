@@ -28,6 +28,7 @@ Verified with an HTTP HEAD of the permanent URL on 2026-08-16 (HTTP 200,
 | Quad9 | `9.9.9.9` / `149.112.112.112` (blocklist); `9.9.9.10` (no blocklist); `9.9.9.11` (blocklist + ECS) | https://quad9.net/service/service-addresses-and-features/ |
 | Cisco OpenDNS | `208.67.222.222` / `208.67.220.220` (Home); `208.67.222.123` / `208.67.220.123` (FamilyShield) | https://www.opendns.com/setupguide/ |
 | AdGuard Public DNS | `94.140.14.140` / `94.140.14.141` (non-filtering); `94.140.14.14` (ads); `94.140.14.15` (family) | https://adguard-dns.io/en/public-dns.html |
+| TurkNet (ISP) | `193.192.98.8` | Widely published TurkNet recursive address (AS12735). Confirmed as TurkNet Iletisim Hizmetleri space via https://ipinfo.io/193.192.98.8 ; also cited in TurkNet user/support threads. This is an ISP resolver, not a global public anycast product. |
 
 Cloudflare’s own docs describe `1.1.1.1` as providing “fast, private DNS
 lookups with no content filtering.” Quad9’s default `9.9.9.9` **does**

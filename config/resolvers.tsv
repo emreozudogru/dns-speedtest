@@ -46,3 +46,8 @@
 0	AdGuard	94.140.14.141	public	none	AdGuard official non-filtering secondary	https://adguard-dns.io/en/public-dns.html
 0	AdGuard	94.140.14.14	public	ads	AdGuard Default: block ads, trackers, malware, phishing	https://adguard-dns.io/en/public-dns.html
 0	AdGuard	94.140.14.15	public	family	AdGuard Family protection: ads + adult content + Safe Search	https://adguard-dns.io/en/public-dns.html
+
+# --- TurkNet ISP DNS ---
+# Commonly published TurkNet recursive address (AS12735). This is an ISP
+# resolver, not a global public anycast product like 1.1.1.1 / 8.8.8.8.
+1	TurkNet	193.192.98.8	isp	none	TurkNet recursive DNS (Turkey)	https://ipinfo.io/193.192.98.8
