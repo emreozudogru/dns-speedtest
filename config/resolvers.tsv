@@ -121,3 +121,7 @@
 # --- CZ.NIC ODVR (https://www.nic.cz/odvr/) ---
 1	CZ.NIC	193.17.47.1	public	none	ODVR DNSSEC-validating primary	https://www.nic.cz/odvr/
 1	CZ.NIC	185.43.135.1	public	none	ODVR DNSSEC-validating secondary	https://www.nic.cz/odvr/
+
+# --- Comodo Secure DNS ---
+1	Comodo	8.26.56.26	public	malware	Comodo Secure DNS primary	https://www.comodo.com/secure-dns/
+1	Comodo	8.20.247.20	public	malware	Comodo Secure DNS secondary	https://www.comodo.com/secure-dns/
