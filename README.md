@@ -245,13 +245,12 @@ Verified against official documentation on 2026-08-16
 | UncensoredDNS | `91.239.100.100` / `89.233.43.71` | none |
 | AliDNS | `223.5.5.5` / `223.6.6.6` | none |
 
-Official IPv4 secondaries of enabled services are **on**. IPv6 rows and
-extra filtering products (Quad9 unsecured/ECS, OpenDNS FamilyShield,
-AdGuard ads/family, Control D malware/family, CIRA Protected/Family,
-CleanBrowsing Family/Adult, DNS4EU Protective/Child, Yandex Safe/Family)
-ship **disabled** and labeled. Enable them in the TSV or pass
-`--include-disabled`. Do not treat a filtering resolver as equivalent to
-an unfiltered one.
+The default run tests **every row** in `config/resolvers.tsv`: all IPv4
+primaries and secondaries, every labeled filtering category, and the
+bundled IPv6 addresses. Filtering variants stay labeled so they are not
+silently treated as equivalent to unfiltered resolvers. IPv6 queries
+time out on IPv4-only networks; that is recorded as a timeout, not as
+0 ms. Disable individual rows in the TSV if you want a smaller set.
 
 Mullvad’s published IPs are **DoH/DoT only** (not UDP/53) and are not
 included. dns0.eu has been discontinued.
@@ -413,7 +412,7 @@ resolvers answer. That is a behavior difference, not proof they are
 | Every resolver times out | Check UDP/53 egress; try `--query-timeout 5` |
 | One resolver is all timeouts | It may be blocked on your network; that is a real result |
 | Parallel looks worse than sequential | Expected; shared capacity. Use `--parallel 1` for latency |
-| IPv6 rows do nothing | The parser accepts them; enable them only if you have IPv6 |
+| IPv6 rows time out | This network may be IPv4-only; disable IPv6 rows in the TSV or ignore those timeouts |
 
 ## Tests and CI
 
