@@ -226,16 +226,20 @@ Verified against official documentation on 2026-08-16
 | Provider | IP | Filtering |
 |---|---|---|
 | Cloudflare | `1.1.1.1` | none (standard 1.1.1.1) |
+| Cloudflare | `1.1.1.2` | malware (1.1.1.1 for Families) |
+| Cloudflare | `1.1.1.3` | family (malware + adult content) |
 | Google | `8.8.8.8` | none |
 | Quad9 | `9.9.9.9` | malware / phishing blocklist (Quad9 default) |
 | OpenDNS | `208.67.222.222` | phishing protection (OpenDNS Home) |
 | AdGuard | `94.140.14.140` | none (official non-filtering server) |
+| TurkNet | `193.192.98.8` | none (ISP recursive DNS) |
 
-Secondaries, IPv6 examples, Cloudflare for Families, Quad9 unsecured /
-ECS, OpenDNS FamilyShield, and AdGuard ad-blocking / family servers ship
-**disabled** and labeled. Enable them in the TSV or pass
-`--include-disabled`. Do not treat a filtering resolver as equivalent to
-an unfiltered one.
+Secondaries, IPv6 examples, Quad9 unsecured / ECS, OpenDNS FamilyShield,
+and AdGuard ad-blocking / family servers ship **disabled** and labeled.
+Enable them in the TSV or pass `--include-disabled`. Do not treat a
+filtering resolver as equivalent to an unfiltered one. Cloudflare’s
+three categories are enabled on purpose so they can be compared, but
+they are different products.
 
 ## How queries are made
 
