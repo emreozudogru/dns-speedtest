@@ -106,3 +106,10 @@
 0	Yandex	77.88.8.2	public	malware	Yandex DNS Safe secondary	https://dns.yandex.com/
 0	Yandex	77.88.8.7	public	family	Yandex DNS Family primary	https://dns.yandex.com/
 0	Yandex	77.88.8.3	public	family	Yandex DNS Family secondary	https://dns.yandex.com/
+
+# --- Hurricane Electric (ordns.he.net) ---
+# Long-running public anycast recursive resolver. HE documents Free DNS
+# hosting at dns.he.net; the recursive anycast 74.82.42.42 is the
+# well-known public resolver (PTR ordns.he.net).
+1	Hurricane Electric	74.82.42.42	public	none	ordns.he.net anycast recursive resolver	https://bgp.he.net/ip/74.82.42.42
+0	Hurricane Electric	2001:470:20::2	public	none	ordns.he.net IPv6	https://bgp.he.net/ip/74.82.42.42
