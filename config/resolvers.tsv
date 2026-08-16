@@ -125,3 +125,7 @@
 # --- Comodo Secure DNS ---
 1	Comodo	8.26.56.26	public	malware	Comodo Secure DNS primary	https://www.comodo.com/secure-dns/
 1	Comodo	8.20.247.20	public	malware	Comodo Secure DNS secondary	https://www.comodo.com/secure-dns/
+
+# --- UncensoredDNS (https://blog.uncensoreddns.org/) ---
+1	UncensoredDNS	91.239.100.100	public	none	anycast.uncensoreddns.org	https://blog.uncensoreddns.org/
+1	UncensoredDNS	89.233.43.71	public	none	unicast.uncensoreddns.org	https://blog.uncensoreddns.org/
