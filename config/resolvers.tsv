@@ -129,3 +129,7 @@
 # --- UncensoredDNS (https://blog.uncensoreddns.org/) ---
 1	UncensoredDNS	91.239.100.100	public	none	anycast.uncensoreddns.org	https://blog.uncensoreddns.org/
 1	UncensoredDNS	89.233.43.71	public	none	unicast.uncensoreddns.org	https://blog.uncensoreddns.org/
+
+# --- AliDNS / Alibaba Public DNS (https://www.alidns.com/) ---
+1	AliDNS	223.5.5.5	public	none	AliDNS primary	https://www.alidns.com/
+1	AliDNS	223.6.6.6	public	none	AliDNS secondary	https://www.alidns.com/
