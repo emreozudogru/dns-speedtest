@@ -1,0 +1,8 @@
+# Project ShellCheck config. Libraries are sourced by dns-speedtest.sh
+# and have no shebang of their own.
+shell=bash
+source-path=SCRIPTDIR
+source-path=SCRIPTDIR/lib
+# SC2034: globals are assigned in one module and read in another.
+# ShellCheck analyzes each file in isolation, so cross-file uses look unused.
+disable=SC2034
