@@ -1,7 +1,8 @@
 # Contributing
 
-Thanks for helping improve dns-speedtest. All project text, comments,
-commit messages, and documentation are written in **English**.
+Thanks for helping improve dns-speedtest. The project is maintained by
+**Emre Ozudogru**. All project text, comments, commit messages, and
+documentation are written in **English**.
 
 ## Development
 
