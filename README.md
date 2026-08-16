@@ -2,6 +2,8 @@
 
 A command-line DNS resolver speed test written in portable Bash.
 
+**Author:** Emre Ozudogru
+
 It measures the **DNS query time** of resolver IP addresses against a
 representative list of popular domains. The clock that matters is the
 `Query time: N msec` value reported by `dig`, not shell runtime, not
