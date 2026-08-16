@@ -117,3 +117,7 @@
 # --- DNS.SB (https://dns.sb/) ---
 1	DNS.SB	185.222.222.222	public	none	DNS.SB primary	https://dns.sb/
 1	DNS.SB	45.11.45.11	public	none	DNS.SB secondary	https://dns.sb/
+
+# --- CZ.NIC ODVR (https://www.nic.cz/odvr/) ---
+1	CZ.NIC	193.17.47.1	public	none	ODVR DNSSEC-validating primary	https://www.nic.cz/odvr/
+1	CZ.NIC	185.43.135.1	public	none	ODVR DNSSEC-validating secondary	https://www.nic.cz/odvr/
