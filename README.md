@@ -104,6 +104,7 @@ against the enabled resolvers in `config/resolvers.tsv`.
 | `--output-dir DIR` | `results/YYYYMMDD-HHMMSS` | Result directory |
 | `--query-type TYPE` | `A` | Record type passed to `dig` |
 | `--include-disabled` | off | Also test TSV rows marked disabled |
+| `--no-probe` | off | Skip the pre-run reachability check |
 | `--list-resolvers` | — | Print the parsed resolver list and exit |
 | `--yes`, `-y` | off | Auto-approve installing a missing package |
 | `--no-install` | off | Never install packages |
@@ -248,9 +249,14 @@ Verified against official documentation on 2026-08-16
 The default run tests **every row** in `config/resolvers.tsv`: all IPv4
 primaries and secondaries, every labeled filtering category, and the
 bundled IPv6 addresses. Filtering variants stay labeled so they are not
-silently treated as equivalent to unfiltered resolvers. IPv6 queries
-time out on IPv4-only networks; that is recorded as a timeout, not as
-0 ms. Disable individual rows in the TSV if you want a smaller set.
+silently treated as equivalent to unfiltered resolvers.
+
+Before the timed benchmark, each resolver is probed once with `dig`
+against `example.com`. A resolver that returns any DNS RCODE
+(NOERROR, NXDOMAIN, SERVFAIL, REFUSED, …) is kept. A timeout or
+command failure is **skipped** for the rest of the run so a dead or
+IPv6-only address does not stall every domain. Skipped IPs are listed
+in `metadata.txt`. Pass `--no-probe` to force testing every resolver.
 
 Mullvad’s published IPs are **DoH/DoT only** (not UDP/53) and are not
 included. dns0.eu has been discontinued.
@@ -412,7 +418,7 @@ resolvers answer. That is a behavior difference, not proof they are
 | Every resolver times out | Check UDP/53 egress; try `--query-timeout 5` |
 | One resolver is all timeouts | It may be blocked on your network; that is a real result |
 | Parallel looks worse than sequential | Expected; shared capacity. Use `--parallel 1` for latency |
-| IPv6 rows time out | This network may be IPv4-only; disable IPv6 rows in the TSV or ignore those timeouts |
+| IPv6 rows skipped | The pre-run probe times out on IPv4-only networks and omits those resolvers |
 
 ## Tests and CI
 
