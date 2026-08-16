@@ -1,0 +1,10 @@
+; <<>> DiG 9.10.6 <<>> @8.8.4.4 example.com A
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: REFUSED, id: 44444
+;; flags: qr rd; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; Query time: 4 msec
+;; SERVER: 8.8.4.4#53(8.8.4.4)
+;; MSG SIZE  rcvd: 29

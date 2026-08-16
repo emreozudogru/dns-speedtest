@@ -1,0 +1,5 @@
+# test resolvers
+1	Cloudflare	1.1.1.1	public	none	unfiltered	https://example
+1	Google	8.8.8.8	public	none	unfiltered	https://example
+0	Quad9	9.9.9.9	public	malware	disabled row	https://example
+1	TimeoutNet	203.0.113.1	public	none	blackhole	https://example

@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  linux:
+    name: Ubuntu (Bash + ShellCheck + tests)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y shellcheck bind9-dnsutils unzip
+      - name: Syntax check
+        run: |
+          bash -n dns-speedtest.sh
+          for f in lib/*.sh tests/run-tests.sh tests/mocks/dig tests/mocks/curl; do
+            bash -n "$f"
+          done
+      - name: ShellCheck
+        run: |
+          shellcheck -x dns-speedtest.sh lib/*.sh tests/run-tests.sh tests/mocks/dig tests/mocks/curl
+      - name: Automated tests
+        run: bash tests/run-tests.sh
+
+  macos:
+    name: macOS system Bash 3.2
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Show system Bash
+        run: |
+          /bin/bash --version
+          /bin/bash -c 'echo BASH_VERSION=$BASH_VERSION'
+      - name: Syntax check with /bin/bash
+        run: |
+          /bin/bash -n dns-speedtest.sh
+          for f in lib/*.sh tests/run-tests.sh tests/mocks/dig tests/mocks/curl; do
+            /bin/bash -n "$f"
+          done
+      - name: Install ShellCheck
+        run: brew install shellcheck
+      - name: ShellCheck
+        run: |
+          shellcheck -x dns-speedtest.sh lib/*.sh tests/run-tests.sh tests/mocks/dig tests/mocks/curl
+      - name: Automated tests with /bin/bash
+        run: /bin/bash tests/run-tests.sh

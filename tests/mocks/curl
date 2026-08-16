@@ -1,0 +1,41 @@
+#!/bin/bash
+# Offline curl double. Writes a tiny Tranco-like zip when asked.
+# Honors curl -o FILE.
+_out=""
+_prev=""
+for _a in "$@"; do
+  if [ "$_prev" = "-o" ]; then
+    _out=$_a
+  fi
+  _prev=$_a
+done
+if [ -z "$_out" ]; then
+  echo "mock curl: no -o" >&2
+  exit 1
+fi
+if [ "${DNSST_MOCK_CURL_FAIL:-0}" = "1" ]; then
+  echo "mock curl: forced failure" >&2
+  exit 22
+fi
+_tmpd=${TMPDIR:-/tmp}
+_csv="$_tmpd/mock-tranco.csv"
+{
+  echo "1,example.com"
+  echo "2,example.net"
+  echo "3,example.org"
+  i=4
+  while [ "$i" -le 30 ]; do
+    echo "$i,site-${i}.example"
+    i=$((i + 1))
+  done
+} > "$_csv"
+# Produce a zip whose contents unzip -p will emit as the CSV.
+_zipdir=$(dirname "$_out")
+mkdir -p "$_zipdir"
+if command -v zip >/dev/null 2>&1; then
+  (cd "$_tmpd" && zip -q "$_out" mock-tranco.csv)
+else
+  # Fallback: not a real zip. Tests that need a download should have zip(1).
+  cp "$_csv" "$_out"
+fi
+exit 0

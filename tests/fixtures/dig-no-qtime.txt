@@ -1,0 +1,6 @@
+; <<>> DiG 9.10.6 <<>> @1.1.1.1 example.com A
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 55555
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 0
+;; ANSWER SECTION:
+example.com.		30	IN	A	93.184.216.34

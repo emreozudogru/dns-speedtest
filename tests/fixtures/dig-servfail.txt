@@ -1,0 +1,10 @@
+; <<>> DiG 9.10.6 <<>> @9.9.9.9 example.com A
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: SERVFAIL, id: 33333
+;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; Query time: 3 msec
+;; SERVER: 9.9.9.9#53(9.9.9.9)
+;; MSG SIZE  rcvd: 29

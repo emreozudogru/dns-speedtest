@@ -1,0 +1,8 @@
+# fixture domains
+example.com
+example.net
+example.org
+# blank line follows
+
+invalid domain with spaces
+ok-site.test

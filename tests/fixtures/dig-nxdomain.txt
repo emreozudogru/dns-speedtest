@@ -1,0 +1,10 @@
+; <<>> DiG 9.10.6 <<>> @8.8.8.8 no-such-label-xyz.example A
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NXDOMAIN, id: 22222
+;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1
+
+;; Query time: 22 msec
+;; SERVER: 8.8.8.8#53(8.8.8.8)
+;; MSG SIZE  rcvd: 40

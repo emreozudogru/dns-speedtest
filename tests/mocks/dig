@@ -1,0 +1,101 @@
+#!/bin/bash
+# Test double for dig. Never talks to the network.
+# Logs "domain ip" to $DNSST_MOCK_LOG when set.
+
+_ip=""
+_domain=""
+_qtype="A"
+_prev=""
+for _a in "$@"; do
+  case "$_a" in
+    @*)
+      _ip=${_a#@}
+      ;;
+    +*)
+      ;;
+    A|AAAA|MX|TXT|NS|CNAME|SOA)
+      _qtype=$_a
+      ;;
+    *)
+      if [ "$_prev" != "-t" ] && [ -z "$_domain" ]; then
+        case "$_a" in
+          -*) ;;
+          *) _domain=$_a ;;
+        esac
+      fi
+      ;;
+  esac
+  _prev=$_a
+done
+
+if [ -n "${DNSST_MOCK_LOG:-}" ]; then
+  printf '%s %s\n' "${_domain:-?}" "${_ip:-?}" >> "$DNSST_MOCK_LOG"
+fi
+
+if [ -n "${DNSST_MOCK_SLEEP:-}" ]; then
+  sleep "$DNSST_MOCK_SLEEP"
+fi
+
+_fixdir=${DNSST_FIXTURE_DIR:-}
+
+emit() {
+  _f=$1
+  _ms=${2:-}
+  if [ -n "$_fixdir" ] && [ -f "$_fixdir/$_f" ]; then
+    if [ -n "$_ms" ]; then
+      sed "s/Query time:[[:space:]]*[0-9][0-9]*[[:space:]]*msec/Query time: ${_ms} msec/" "$_fixdir/$_f"
+    else
+      cat "$_fixdir/$_f"
+    fi
+    return 0
+  fi
+  return 1
+}
+
+# Deterministic times by resolver IP so ranking tests are stable.
+case "$_ip" in
+  203.0.113.1)
+    emit dig-timeout.txt
+    exit 9
+    ;;
+  203.0.113.2)
+    emit dig-servfail.txt
+    exit 0
+    ;;
+  203.0.113.3)
+    emit dig-refused.txt
+    exit 0
+    ;;
+  203.0.113.4)
+    emit dig-no-qtime.txt
+    exit 0
+    ;;
+  192.0.2.1)
+    emit dig-noerror.txt 11
+    exit 0
+    ;;
+  192.0.2.2)
+    emit dig-noerror.txt 22
+    exit 0
+    ;;
+  192.0.2.3)
+    emit dig-noerror.txt 33
+    exit 0
+    ;;
+  1.1.1.1)
+    emit dig-noerror.txt 10
+    exit 0
+    ;;
+  8.8.8.8)
+    emit dig-noerror.txt 20
+    exit 0
+    ;;
+  9.9.9.9)
+    emit dig-noerror.txt 30
+    exit 0
+    ;;
+  *)
+    emit dig-noerror.txt 15
+    exit 0
+    ;;
+esac
